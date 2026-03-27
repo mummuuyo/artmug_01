@@ -1,0 +1,43 @@
+<script>
+function copyAll() {
+    let text = "[ Live2D 리깅 의뢰 상세 견적 ]\n";
+    let hasItems = false;
+
+    document.querySelectorAll('.table-row').forEach(row => {
+        const label = row.querySelector('.item-label').innerText;
+        const qty = row.querySelector('.input-qty').value;
+        const price = parseInt(row.getAttribute('data-price')) || 0;
+
+        if(parseInt(qty) > 0) {
+            text += `• ${label}: ${qty}개 (${(price * qty).toLocaleString()}원)\n`;
+            hasItems = true;
+        }
+    });
+
+    text += `\n최종 합계: ${document.getElementById('totalPriceDisplay').innerText}\n\n[ 신청인 양식 ]\n`;
+
+    const inputs = document.querySelectorAll('#step2 input, #step2 textarea');
+    const labels = document.querySelectorAll('#step2 label');
+
+    inputs.forEach((input, i) => {
+        text += `• ${labels[i].innerText}: ${input.value || '(미입력)'}\n`;
+    });
+
+    // ✅ 클립보드 복사
+    navigator.clipboard.writeText(text);
+
+    // ================================
+    // ★ 핵심 수정 (여기)
+    // ================================
+
+    const encoded = encodeURIComponent(text);
+
+    const popupUrl = `https://artmug.kr/index.php?channel=view&uid=54344&content=${encoded}`;
+
+    window.open(
+        popupUrl,
+        "artmug_qna",
+        "width=800,height=900,scrollbars=yes,resizable=yes"
+    );
+}
+</script>
