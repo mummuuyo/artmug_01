@@ -10,7 +10,6 @@
 <style>
 body { margin:0; background:#0a0a0a; color:#fff; font-family:sans-serif; }
 
-/* 버튼 */
 .btn-action {
     width:100%;
     padding:18px;
@@ -63,10 +62,10 @@ iframe {
 <body>
 
 <div style="max-width:800px; margin:100px auto; text-align:center;">
-    <h1>견적 테스트 페이지</h1>
-    <p>버튼 누르면 아트머그 문의창 팝업</p>
+    <h1>포트폴리오 테스트</h1>
+    <p>문의 버튼 → 아트머그 팝업</p>
 
-    <button class="btn-action" onclick="openContact()">문의하기</button>
+    <button class="btn-action" onclick="copyAll()">문의하기</button>
 </div>
 
 <!-- 팝업 -->
@@ -78,8 +77,15 @@ iframe {
 </div>
 
 <script>
-function openContact() {
-    const url = "https://artmug.kr/index.php?channel=view&uid=54344";
+function copyAll() {
+    let text = "[ Live2D 리깅 의뢰 상세 견적 ]\n";
+    text += "테스트 데이터\n";
+
+    navigator.clipboard.writeText(text);
+
+    const encoded = encodeURIComponent(text);
+    const url = `https://artmug.kr/index.php?channel=view&uid=54344&content=${encoded}`;
+
     document.getElementById("contactFrame").src = url;
     document.getElementById("contactModal").style.display = "block";
 }
@@ -92,5 +98,3 @@ function closeContact() {
 
 </body>
 </html>
-}
-</script>
