@@ -574,14 +574,14 @@
             setTimeout(sendHeightToParent, 50);
         }
 
-function copyAll() {
-    let text = "[ Live2D 리깅 의뢰 상세 견적 ]\n";
-    let hasItems = false;
+        function copyAll() {
+            let text = "[ Live2D 리깅 의뢰 상세 견적 ]\n";
+            let hasItems = false;
 
-    document.querySelectorAll('.table-row').forEach(row => {
-        const label = row.querySelector('.item-label').innerText;
-        const qty = row.querySelector('.input-qty').value;
-        const price = parseInt(row.getAttribute('data-price')) || 0;
+        document.querySelectorAll('.table-row').forEach(row => {
+            const label = row.querySelector('.item-label').innerText;
+            const qty = row.querySelector('.input-qty').value;
+            const price = parseInt(row.getAttribute('data-price')) || 0;
 
         if(parseInt(qty) > 0) {
             text += `• ${label}: ${qty}개 (${(price * qty).toLocaleString()}원)\n`;
